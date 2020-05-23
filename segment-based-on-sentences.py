@@ -32,8 +32,6 @@ if __name__ == "__main__":
     text = {"fragments": []}
     with open(r"vids/Output.txt", "r") as f:
         try:
-            print(f.readline())
-
             while True:
                 # Pick the timestamps and text from the caption
                 timeString = f.readline()[:-1]
@@ -76,7 +74,6 @@ if __name__ == "__main__":
         if len(splitted) != 1:
             endTime = fragment['endTime']
             sentence += splitted[0]
-            print(beginTime + " -> " + endTime + ":  " + sentence)
             res['sentences'].append({'beginTime': beginTime, 'endTime': endTime, 'text': sentence})
 
             sentence = splitted[1]
@@ -91,7 +88,6 @@ if __name__ == "__main__":
             if i % 2 != 0: 
                 beginTime = getSec(res['sentences'][i]['beginTime'])
                 endTime = getSec(res['sentences'][i+4]['endTime'])
-                print(YOUTUBE_VIDEO_ID + "," + str(beginTime) + "," + str(endTime))
                 f.write(YOUTUBE_VIDEO_ID + "," + str(beginTime) + "," + str(endTime) + "\n")
 
 
