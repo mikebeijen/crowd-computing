@@ -52,3 +52,15 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function start() {
+    window.location.replace("positive.html");
+}
+
+function posNext() {
+    window.location.replace("negative.html");
+}
+
+function negNext() {
+    window.location.replace("assessment.html");
+}
