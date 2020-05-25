@@ -2,10 +2,11 @@
 <script src="index.js"></script>
 
 <div class="container">
-    <h2>Please assess the sentiment of the following video:</h2>
+
         <div id="video-embed"></div>
         <script>getVideoEmbed()</script>
         <br><br>
+         <h2>Please assess the sentiment of the video above:</h2>
         <form id="sentiment-form">
             Very negative
             <label>
@@ -30,8 +31,36 @@
                 <input type="radio" name="sentiment" value="7" />
             </label>
             Very positive
+        </form>
+            <h2>Please indicate if the main message of the video was clear</h2>
+            <form id="topic-form">
+            Not clear
+            <label>
+                <input type="radio" name="clear" value="0" />
+            </label>
+            <label>
+                <input type="radio" name="clear" value="1" />
+            </label>
+            <label>
+                <input type="radio" name="clear" value="2" />
+            </label>
+            Clear
 
+        </form>
+            <h2>Please state to what degree you agree with the general message of this content</h2>
+     <form id="opinion-form">
+            Disagree
+            <label>
+                <input type="radio" name="opinion" value="0" />
+            </label>
+            <label>
+                <input type="radio" name="opinion" value="1" />
+            </label>
+            <label>
+                <input type="radio" name="opinion" value="2" />
+            </label>
+            Agree
+        </form>
             <br><br>
             <button type="button" onclick="process()">Submit</button>
-        </form>
 </div>
