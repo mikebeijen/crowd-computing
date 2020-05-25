@@ -7,6 +7,7 @@
         <script>getVideoEmbed()</script>
         <br><br>
         <form id="sentiment-form">
+            How would you rate the sentiment of the video?<br>
             Very negative
             <label>
                 <input type="radio" name="sentiment" value="1" />
@@ -30,6 +31,28 @@
                 <input type="radio" name="sentiment" value="7" />
             </label>
             Very positive
+            
+            <br><br><br>
+            Was the video clear?<br>
+            Yes
+            <label>
+                <input type="radio" name="clarity" value="true" />
+            </label>
+            <label>
+                <input type="radio" name="clarity" value="false" />
+            </label>
+            No
+
+            <br><br><br>
+            Did you agree with the content of the video?<br>
+            Yes
+            <label>
+                <input type="radio" name="content" value="true" />
+            </label>
+            <label>
+                <input type="radio" name="content" value="false" />
+            </label>
+            No
 
             <br><br>
             <button type="button" onclick="process()">Submit</button>
