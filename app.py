@@ -1,4 +1,4 @@
-from flask import Flask, render_template, make_response
+from flask import Flask, render_template, make_response, json
 from flask import redirect, request, jsonify, url_for
 
 import os
@@ -17,6 +17,10 @@ def post_javascript_data():
     jsdata = request.form['video_data']
     print(jsdata)
     return jsdata
+
+@app.route('/getmethod', methods= ['GET'])
+def get_javascript_data():
+    return "mii6NydPiqI"
 
 
 if __name__ == '__main__':

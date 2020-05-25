@@ -1,4 +1,4 @@
-videoId = "mii6NydPiqI"
+//videoId = "mii6NydPiqI"
 startTime = getRandomInt(0, 100)
 endTime = startTime + 10
 
@@ -38,12 +38,13 @@ function process(){
             }, function(err, req, resp){
             window.location.href = "/";
         });
-        location.reload();
+//        location.reload();
     }
 }
 
 function getVideoEmbed() {
-    htmlResult = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + videoId + '?controls=0&start=' + startTime + '&end=' + endTime + ';" frameborder="0"></iframe>';
+    var msg = $.ajax({type: "GET", url: "/getmethod", async: false}).responseText;
+    htmlResult = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + msg + '?controls=0&start=' + startTime + '&end=' + endTime + ';" frameborder="0"></iframe>';
     document.getElementById("video-embed").innerHTML = htmlResult;
 }
 
