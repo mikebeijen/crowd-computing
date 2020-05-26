@@ -1,9 +1,8 @@
-  var msg = $.ajax({type: "GET", url: "/getmethod", async: false}).responseText;
-  var obj = JSON.parse(msg)
-    videoId = obj.videoId
-    startTime = obj.startTime
-    endTime = obj.endTime
-
+var msg = $.ajax({type: "GET", url: "/getmethod", async: false}).responseText;
+var obj = JSON.parse(msg)
+videoId = obj.videoId
+startTime = obj.startTime
+endTime = obj.endTime
 
 function process(){
     // Declare values and find them in the for-loops

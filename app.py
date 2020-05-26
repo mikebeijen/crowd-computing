@@ -1,6 +1,9 @@
 from flask import Flask, render_template, make_response, json
 from flask import redirect, request, jsonify, url_for
 import json, csv, os
+import pandas as pd
+
+import os
 
 app = Flask(__name__)
 app._static_folder = os.path.abspath("templates/static/")
@@ -42,6 +45,9 @@ def post_javascript_data():
 
 @app.route('/getmethod', methods= ['GET'])
 def get_javascript_data():
+    df = pd.read_csv('data/res.csv')
+    print(df)
+
     return jsonify(videoId="mii6NydPiqI", startTime=10, endTime=20)
 
 
