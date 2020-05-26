@@ -12,6 +12,24 @@ def index():
     return render_template('layouts/index.html',
                            title=title)
 
+@app.route('/positive.html', methods=['GET'])
+def positivePage():
+    title = 'Create the input'
+    return render_template('layouts/positive.html',
+                           title=title)
+
+@app.route('/negative.html', methods=['GET'])
+def negativePage():
+    title = 'Create the input'
+    return render_template('layouts/negative.html',
+                           title=title)
+
+@app.route('/assessment.html', methods=['GET'])
+def assessmentPage():
+    title = 'Create the input'
+    return render_template('layouts/assessment.html',
+                           title=title)
+
 @app.route('/postmethod', methods = ['POST'])
 def post_javascript_data():
     jsdata = request.form['video_data']
@@ -20,7 +38,7 @@ def post_javascript_data():
 
 @app.route('/getmethod', methods= ['GET'])
 def get_javascript_data():
-    return "mii6NydPiqI"
+    return jsonify(videoId="mii6NydPiqI", startTime=10, endTime=20)
 
 
 if __name__ == '__main__':
