@@ -1,4 +1,67 @@
-.container{
+.container {
     text-align: center;
-    padding-top: 50px;
+    background-color: white;
+    border-style:solid;
+    border-color: white;
+    border-width: thin;
+    display: inline-block;
+    padding: 10px;
 }
+
+.outer{
+    display: table;
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+}
+
+.middle{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.cut{
+    background: white;
+    border-style: solid;
+    border-color: #626262;
+    color: #626262;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cut:hover{
+    background-color: #626262;
+    border-color: #626262;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #9C9C9C;
+}
+
+h1 {
+    color: #626262;
+    font-weight: bold;
+}
+
+html {
+    background-image: url("background.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+

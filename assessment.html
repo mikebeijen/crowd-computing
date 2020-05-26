@@ -1,66 +1,80 @@
+<html>
+
+<head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="index.js"></script>
+</head>
 
-<div class="container">
-    <h2>Please assess the sentiment of the following video:</h2>
-        <div id="video-embed"></div>
-        <script>getVideoEmbed()</script>
-        <br><br>
-        <form id="sentiment-form">
-            How would you rate the sentiment of the video?<br>
-            Very negative
-            <label>
-                <input type="radio" name="sentiment" value="1" />
-            </label>
-            <label>
-                <input type="radio" name="sentiment" value="2" />
-            </label>
-            <label>
-                <input type="radio" name="sentiment" value="3" />
-            </label>
-            <label>
-                <input type="radio" name="sentiment" value="4" />
-            </label>
-            <label>
-                <input type="radio" name="sentiment" value="5" />
-            </label>
-            <label>
-                <input type="radio" name="sentiment" value="6" />
-            </label>
-            <label>
-                <input type="radio" name="sentiment" value="7" />
-            </label>
-            Very positive
-            
-            <br><br><br>
-            Was the video clear?<br>
-            No
-            <label>
-                <input type="radio" name="clarity" value="false" />
-            </label>
-            <label>
-                <input type="radio" name="clarity" value="indifferent" />
-            </label>
-            <label>
-                <input type="radio" name="clarity" value="true" />
-            </label>
-            Yes
+<body>
+<div class="outer">
+        <div class="middle">
+            <div class="inner">
 
-            <br><br><br>
-            Did you agree with the content of the video?<br>
-            No
-            <label>
-                <input type="radio" name="content" value="false" />
-            </label>
-            <label>
-                <input type="radio" name="content" value="indifferent" />
-            </label>
-            <label>
-                <input type="radio" name="content" value="true" />
-            </label>
-            Yes
+                <div class="container">
+                    <h1>Please assess the sentiment of the following video:</h1>
+                        <div id="video-embed"></div>
+                        <script>getVideoEmbed()</script>
+                        <br><br>
+                        <form id="sentiment-form">
+                            How would you rate the sentiment of the video?<br>
+                            Very negative
+                            <label>
+                                <input type="radio" name="sentiment" value="1" />
+                            </label>
+                            <label>
+                                <input type="radio" name="sentiment" value="2" />
+                            </label>
+                            <label>
+                                <input type="radio" name="sentiment" value="3" />
+                            </label>
+                            <label>
+                                <input type="radio" name="sentiment" value="4" />
+                            </label>
+                            <label>
+                                <input type="radio" name="sentiment" value="5" />
+                            </label>
+                            <label>
+                                <input type="radio" name="sentiment" value="6" />
+                            </label>
+                            <label>
+                                <input type="radio" name="sentiment" value="7" />
+                            </label>
+                            Very positive
 
-            <br><br>
-            <button type="button" onclick="process()">Submit</button>
-        </form>
+                            <br><br><br>
+                            Was the video clear?<br>
+                            No
+                            <label>
+                                <input type="radio" name="clarity" value="false" />
+                            </label>
+                            <label>
+                                <input type="radio" name="clarity" value="indifferent" />
+                            </label>
+                            <label>
+                                <input type="radio" name="clarity" value="true" />
+                            </label>
+                            Yes
+
+                            <br><br><br>
+                            Did you agree with the content of the video?<br>
+                            No
+                            <label>
+                                <input type="radio" name="content" value="false" />
+                            </label>
+                            <label>
+                                <input type="radio" name="content" value="indifferent" />
+                            </label>
+                            <label>
+                                <input type="radio" name="content" value="true" />
+                            </label>
+                            Yes
+
+                            <br><br>
+                            <button class="cut" type="button" onclick="process()">Submit</button>
+                        </form>
+                </div>
+            </div>
+        </div>
 </div>
+</body>
+</html>
