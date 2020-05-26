@@ -32,12 +32,13 @@ def assessmentPage():
 @app.route('/postmethod', methods = ['POST'])
 def post_javascript_data():
     jsdata = request.form['video_data']
-    print(jsdata)
     jsdata = json.loads(jsdata)
-    with open("assessment-" + jsdata["videoid"] + ".csv") as csvfile:
-        csvwriter = csv.writer(csvfile, delimeter=',', quotechar="", quoting=csv.QUOTE_MINIMAL)
+    with open("assessment-" + jsdata["videoid"] + ".csv", mode="a+", newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
         csvwriter.writerow([jsdata["videoid"], jsdata["starttime"], jsdata["endtime"], jsdata["value"], jsdata["clarity"], jsdata["agree"]])
         csvfile.close()
+
+    return "", 200
 
 @app.route('/getmethod', methods= ['GET'])
 def get_javascript_data():
