@@ -1,7 +1,6 @@
 from flask import Flask, render_template, make_response, json
 from flask import redirect, request, jsonify, url_for
-
-import os
+import json, csv, os
 
 app = Flask(__name__)
 app._static_folder = os.path.abspath("templates/static/")
@@ -34,7 +33,11 @@ def assessmentPage():
 def post_javascript_data():
     jsdata = request.form['video_data']
     print(jsdata)
-    return jsdata
+    jsdata = json.loads(jsdata)
+    with open("assessment-" + jsdata["videoid"] + ".csv") as csvfile:
+        csvwriter = csv.writer(csvfile, delimeter=',', quotechar="", quoting=csv.QUOTE_MINIMAL)
+        csvwriter.writerow([jsdata["videoid"], jsdata["starttime"], jsdata["endtime"], jsdata["value"], jsdata["clarity"], jsdata["agree"]])
+        csvfile.close()
 
 @app.route('/getmethod', methods= ['GET'])
 def get_javascript_data():
