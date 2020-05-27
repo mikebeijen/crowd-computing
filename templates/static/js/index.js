@@ -1,6 +1,8 @@
-videoId = "mii6NydPiqI"
-startTime = getRandomInt(0, 100)
-endTime = startTime + 10
+var msg = $.ajax({type: "GET", url: "/getmethod", async: false}).responseText;
+var obj = JSON.parse(msg)
+videoId = obj.videoId
+startTime = obj.startTime
+endTime = obj.endTime
 
 function process(){
     // Declare values and find them in the for-loops
@@ -29,7 +31,7 @@ function process(){
         }
     }
 
-    // Alert if any of the values are null, submit values otherwise
+
     if (value == null) {
         alert("You did not choose a sentiment yet.");
     } else if (clarityValue == null) {
@@ -38,19 +40,17 @@ function process(){
         alert("You did not choose whether you agreed with the video yet.");
     } else {
         alert("Sentiment: " + value + "\nClear: " + clarityValue + "\nAgree:" + agreeValue + "\n\nVideo id: " + videoId + "\nStart time: " + startTime + "\nEnd time: " + endTime);
-        location.reload();
+        $.post( "/postmethod", {
+            video_data: JSON.stringify({value: value, clarity: clarityValue, agree:agreeValue, videoid: videoId, starttime: startTime, endtime: endTime})
+            }, function(err, req, resp){
+            window.location.href = "/assessment.html";
+        });
     }
 }
 
 function getVideoEmbed() {
     htmlResult = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + videoId + '?controls=0&start=' + startTime + '&end=' + endTime + ';" frameborder="0"></iframe>';
     document.getElementById("video-embed").innerHTML = htmlResult;
-}
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function start() {

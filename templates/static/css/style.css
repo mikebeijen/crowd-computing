@@ -56,7 +56,7 @@ h1 {
 }
 
 html {
-    background-image: url("background.jpg");
+    background-image: url("/static/assets/background.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
