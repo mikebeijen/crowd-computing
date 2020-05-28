@@ -5,6 +5,7 @@ startTime = obj.startTime
 endTime = obj.endTime
 
 function process(){
+
     // Declare values and find them in the for-loops
     value = null
     clarityValue = null
@@ -53,6 +54,15 @@ function getVideoEmbed() {
     document.getElementById("video-embed").innerHTML = htmlResult;
 }
 
+// Functions to show and hide the clarity textbox
+function showTextbox(){
+    document.getElementById("clarity-div").style.display = '';
+}
+
+function hideTextbox(){
+    document.getElementById("clarity-div").style.display = 'none';
+}
+
 function start() {
     window.location.replace("positive.html");
 }
@@ -64,3 +74,4 @@ function posNext() {
 function negNext() {
     window.location.replace("assessment.html");
 }
+

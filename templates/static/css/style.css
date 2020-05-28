@@ -63,5 +63,27 @@ html {
     background-size: cover;
 }
 
+input[type=radio] {
+    display: block;
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-top: 5px;
+    margin-bottom: 3px;
 
+}
+label {
+    display: inline-block;
+}
 
+.radiobuttons-form {
+    text-align: center;
+}
+
+input[type=text] {
+    margin-top: 5px;
+}
+
+input::placeholder {
+    color: #bababa;
+    font-family: 'Montserrat', sans-serif;
+}
