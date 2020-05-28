@@ -14,28 +14,31 @@ function process(){
     elements = document.getElementsByName("sentiment");
     for(i = 0; i < elements.length; i++) {
         if(elements[i].checked) {
-            value = elements[i].value
+            value = i
         }
     }
 
     clarityElements = document.getElementsByName("clarity");
     for(i = 0; i < clarityElements.length; i++) {
         if(clarityElements[i].checked) {
-            clarityValue = clarityElements[i].value
+            clarityValue = i
         }
     }
 
     agreeElements = document.getElementsByName("content");
     for(i = 0; i < agreeElements.length; i++) {
         if(agreeElements[i].checked) {
-            agreeValue = agreeElements[i].value
+            agreeValue = i
         }
     }
 
-    clarityText = document.getElementById("clarity-textbox").value;
+    if (clarityValue == 0) {
+        clarityValue = "yes";
+    } else {
+        clarityValue = "no";
+    }
 
-    alert(clarityValue);
-    alert(clarityText);
+    clarityText = document.getElementById("clarity-textbox").value;
 
     if (value == null) {
         alert("You did not choose a sentiment yet.");
@@ -43,11 +46,17 @@ function process(){
         alert("You did not choose whether the video was clear yet.");
     } else if (agreeValue == null) {
         alert("You did not choose whether you agreed with the video yet.");
-    } else if (clarityValue != null && clarityText == null) {
+    } else if (clarityValue == "no" && clarityText == "") {
         alert("You did not explain why the video was unclear yet.");
     } else {
+        if (clarityText == "") {
+            clarityText = " "
+        }
+
+        clarityText = clarityText.replace(",", ";")
+
         $.post( "/postmethod", {
-            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, clarityText: clarityText})
+            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, claritytext: clarityText})
             }, function(err, req, resp){
             window.location.href = "/assessment.html";
         });
