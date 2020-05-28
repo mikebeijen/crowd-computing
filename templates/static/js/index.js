@@ -32,6 +32,10 @@ function process(){
         }
     }
 
+    clarityText = document.getElementById("clarity-textbox").value;
+
+    alert(clarityValue);
+    alert(clarityText);
 
     if (value == null) {
         alert("You did not choose a sentiment yet.");
@@ -39,10 +43,11 @@ function process(){
         alert("You did not choose whether the video was clear yet.");
     } else if (agreeValue == null) {
         alert("You did not choose whether you agreed with the video yet.");
+    } else if (clarityValue != null && clarityText == null) {
+        alert("You did not explain why the video was unclear yet.");
     } else {
-        alert("Sentiment: " + value + "\nClear: " + clarityValue + "\nAgree:" + agreeValue + "\n\nVideo id: " + videoId + "\nStart time: " + startTime + "\nEnd time: " + endTime);
         $.post( "/postmethod", {
-            video_data: JSON.stringify({value: value, clarity: clarityValue, agree:agreeValue, videoid: videoId, starttime: startTime, endtime: endTime})
+            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, clarityText: clarityText})
             }, function(err, req, resp){
             window.location.href = "/assessment.html";
         });
