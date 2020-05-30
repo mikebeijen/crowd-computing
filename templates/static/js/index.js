@@ -6,8 +6,7 @@ endTime = obj.endTime
 
 // Disable button for as long as the video takes
 $( document ).ready(function() {
-    timeout = (endTime - startTime) * 1000
-    alert(timeout)
+    timeout = (endTime - startTime) * 1000;
     document.getElementById("votebutton").disabled = true;
     setTimeout(function(){document.getElementById("votebutton").disabled = false;},timeout);
 });
