@@ -4,6 +4,14 @@ videoId = obj.videoId
 startTime = obj.startTime
 endTime = obj.endTime
 
+// Disable button for as long as the video takes
+$( document ).ready(function() {
+    timeout = (endTime - startTime) * 1000
+    alert(timeout)
+    document.getElementById("votebutton").disabled = true;
+    setTimeout(function(){document.getElementById("votebutton").disabled = false;},timeout);
+});
+
 function process(){
 
     // Declare values and find them in the for-loops
