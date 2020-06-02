@@ -111,3 +111,7 @@ document.getElementById("next").style.display = 'block';
 function wrongPositive() {
     alert("Remember, this is a positive example!");
 }
+
+function wrongNegative() {
+    alert("Remember, this is a negative example!");
+}
