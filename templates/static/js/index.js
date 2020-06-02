@@ -96,3 +96,18 @@ function negNext() {
     window.location.replace("assessment.html");
 }
 
+function trainingLoadAgree() {
+    document.getElementById("agree-intro").style.display = 'block';
+}
+
+function trainingLoadClear() {
+    document.getElementById("clear-intro").style.display = 'block';
+}
+
+function trainingDone() {
+document.getElementById("next").style.display = 'block';
+}
+
+function wrongPositive() {
+    alert("Remember, this is a positive example!");
+}
