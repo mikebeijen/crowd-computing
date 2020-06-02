@@ -4,7 +4,15 @@ videoId = obj.videoId
 startTime = obj.startTime
 endTime = obj.endTime
 
+// Disable button for as long as the video takes
+$( document ).ready(function() {
+    timeout = (endTime - startTime) * 1000;
+    document.getElementById("votebutton").disabled = true;
+    setTimeout(function(){document.getElementById("votebutton").disabled = false;},timeout);
+});
+
 function process(){
+
     // Declare values and find them in the for-loops
     value = null
     clarityValue = null
@@ -13,24 +21,31 @@ function process(){
     elements = document.getElementsByName("sentiment");
     for(i = 0; i < elements.length; i++) {
         if(elements[i].checked) {
-            value = elements[i].value
+            value = i
         }
     }
 
     clarityElements = document.getElementsByName("clarity");
     for(i = 0; i < clarityElements.length; i++) {
         if(clarityElements[i].checked) {
-            clarityValue = clarityElements[i].value
+            clarityValue = i
         }
     }
 
     agreeElements = document.getElementsByName("content");
     for(i = 0; i < agreeElements.length; i++) {
         if(agreeElements[i].checked) {
-            agreeValue = agreeElements[i].value
+            agreeValue = i
         }
     }
 
+    if (clarityValue == 0) {
+        clarityValue = "yes";
+    } else {
+        clarityValue = "no";
+    }
+
+    clarityText = document.getElementById("clarity-textbox").value;
 
     if (value == null) {
         alert("You did not choose a sentiment yet.");
@@ -38,10 +53,17 @@ function process(){
         alert("You did not choose whether the video was clear yet.");
     } else if (agreeValue == null) {
         alert("You did not choose whether you agreed with the video yet.");
+    } else if (clarityValue == "no" && clarityText == "") {
+        alert("You did not explain why the video was unclear yet.");
     } else {
-        alert("Sentiment: " + value + "\nClear: " + clarityValue + "\nAgree:" + agreeValue + "\n\nVideo id: " + videoId + "\nStart time: " + startTime + "\nEnd time: " + endTime);
+        if (clarityText == "") {
+            clarityText = " "
+        }
+
+        clarityText = clarityText.replace(",", ";")
+
         $.post( "/postmethod", {
-            video_data: JSON.stringify({value: value, clarity: clarityValue, agree:agreeValue, videoid: videoId, starttime: startTime, endtime: endTime})
+            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, claritytext: clarityText})
             }, function(err, req, resp){
             window.location.href = "/assessment.html";
         });
@@ -51,6 +73,15 @@ function process(){
 function getVideoEmbed() {
     htmlResult = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + videoId + '?controls=0&start=' + startTime + '&end=' + endTime + ';" frameborder="0"></iframe>';
     document.getElementById("video-embed").innerHTML = htmlResult;
+}
+
+// Functions to show and hide the clarity textbox
+function showTextbox(){
+    document.getElementById("clarity-div").style.display = '';
+}
+
+function hideTextbox(){
+    document.getElementById("clarity-div").style.display = 'none';
 }
 
 function start() {
@@ -64,3 +95,4 @@ function posNext() {
 function negNext() {
     window.location.replace("assessment.html");
 }
+

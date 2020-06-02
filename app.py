@@ -38,7 +38,7 @@ def post_javascript_data():
     jsdata = json.loads(jsdata)
     with open("assessment-" + jsdata["videoid"] + ".csv", mode="a+", newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow([jsdata["videoid"], int(jsdata["starttime"]), int(jsdata["endtime"]), jsdata["value"], jsdata["clarity"], jsdata["agree"]])
+        csvwriter.writerow([jsdata["videoid"], int(jsdata["starttime"]), int(jsdata["endtime"]), jsdata["value"], jsdata["agree"], jsdata["clarity"], jsdata["claritytext"]])
         csvfile.close()
 
     return "", 200

@@ -17,59 +17,48 @@
                         <br><br>
                         <form id="sentiment-form">
                             How would you rate the sentiment of the video?<br>
-                            Very negative
-                            <label>
-                                <input type="radio" name="sentiment" value="1" />
-                            </label>
-                            <label>
-                                <input type="radio" name="sentiment" value="2" />
-                            </label>
-                            <label>
-                                <input type="radio" name="sentiment" value="3" />
-                            </label>
-                            <label>
-                                <input type="radio" name="sentiment" value="4" />
-                            </label>
-                            <label>
-                                <input type="radio" name="sentiment" value="5" />
-                            </label>
-                            <label>
-                                <input type="radio" name="sentiment" value="6" />
-                            </label>
-                            <label>
-                                <input type="radio" name="sentiment" value="7" />
-                            </label>
-                            Very positive
+                            (1 = very negative, 7 = very positive)<br>
+                            <div id="radiobuttons-form">
+                                <label><input type="radio" name="sentiment" />1</label>
+                                <label><input type="radio" name="sentiment" />2</label>
+                                <label><input type="radio" name="sentiment" />3</label>
+                                <label><input type="radio" name="sentiment" />4</label>
+                                <label><input type="radio" name="sentiment" />5</label>
+                                <label><input type="radio" name="sentiment" />6</label>
+                                <label><input type="radio" name="sentiment" />7</label>
+                            </div>
 
-                            <br><br><br>
-                            Was the video clear?<br>
-                            No
-                            <label>
-                                <input type="radio" name="clarity" value="false" />
-                            </label>
-                            <label>
-                                <input type="radio" name="clarity" value="indifferent" />
-                            </label>
-                            <label>
-                                <input type="radio" name="clarity" value="true" />
-                            </label>
-                            Yes
-
-                            <br><br><br>
-                            Did you agree with the content of the video?<br>
-                            No
-                            <label>
-                                <input type="radio" name="content" value="false" />
-                            </label>
-                            <label>
-                                <input type="radio" name="content" value="indifferent" />
-                            </label>
-                            <label>
-                                <input type="radio" name="content" value="true" />
-                            </label>
-                            Yes
                             <br><br>
-                            <button class="cut" type="button" onclick="process()">Submit</button>
+                            Did you agree with the content of the video?<br>
+                            (1 = complete agreement, 7 = complete disagreement)<br>
+                            <div id="radiobuttons-form">
+                                <label><input type="radio" name="content" />1</label>
+                                <label><input type="radio" name="content" />2</label>
+                                <label><input type="radio" name="content" />3</label>
+                                <label><input type="radio" name="content" />4</label>
+                                <label><input type="radio" name="content" />5</label>
+                                <label><input type="radio" name="content" />6</label>
+                                <label><input type="radio" name="content" />7</label>
+                            </div>
+
+                            <br><br>
+                            Was the video clear?<br>
+                            <div id="radiobuttons-form">
+                                <label><input type="radio" name="clarity" onclick="hideTextbox()"/>Yes</label>
+                                <label><input type="radio" name="clarity" onclick="showTextbox()" />No</label>
+                            </div>
+
+
+                            <div id="clarity-div"  style="display: none">
+                            <br><br>
+                            What was unclear about the video?<br>
+                                <input type="text" id="clarity-textbox" placeholder="Type here..."/>
+                            </div>
+
+                            <br><br>
+
+
+                            <button id="votebutton" class="cut" type="button" onclick="process()">Submit</button>
                         </form>
                 </div>
             </div>
