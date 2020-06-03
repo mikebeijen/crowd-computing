@@ -7,7 +7,7 @@ positive = True
 
 # Saves a part of the video to a seperate file
 def crop(start: str, end: str, input: str, output: str):
-    command = "ffmpeg -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
+    command = "ffmpeg -y -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
     os.system(command)
     # subprocess.call(command)
 
@@ -100,9 +100,10 @@ if __name__ == "__main__":
     # Create video splits
     counter = 1
     mergeList = open("mergelist-" + videoId + ".txt", "w+")
+    os.system("mkdir video-splits-" + videoId)
     for split in resultingSplits:
-        input = "/full-video-" + videoId + "/" + videoId + ".mp4"
-        output = "/video-splits-" + videoId + "/" + str(counter) + ".mp4"
+        input = os.getcwd() + "\\full-video-" + videoId + "\\" + videoId + ".mp4"
+        output = os.getcwd() + "\\video-splits-" + videoId + "\\" + str(counter) + ".mp4"
         crop(str(split.startTime), str(split.endTime), input, output)
         counter += 1
         mergeList.write("file '" + output + "'\n")
