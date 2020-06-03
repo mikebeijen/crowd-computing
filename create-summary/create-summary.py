@@ -1,4 +1,4 @@
-import operator, os, pytube
+import operator, os, pytube, subprocess
 
 videoId = "zyOQI995HWU"
 summaryLengthSeconds = 100
@@ -9,7 +9,7 @@ positive = True
 def crop(start: str, end: str, input: str, output: str):
     command = "ffmpeg -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
     os.system(command)
-
+    # subprocess.call(command)
 
 # Download the YouTube video if it is not downloaded yet
 def downloadVideo():
