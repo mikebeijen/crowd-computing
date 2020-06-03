@@ -41,9 +41,9 @@ def post_javascript_data():
         csvwriter = csv.writer(csvfile)
 
         if os.stat("assessment-" + jsdata["videoid"] + ".csv").st_size == 0:
-            csvwriter.writerow(["Video id, Start time, End time, Sentiment value, Agreement value, Clarity value, Clarity explanation, Relevance value, General comment"])
+            csvwriter.writerow(["Video id, Start time, End time, Sentiment value, Agreement value, Clarity value, Clarity explanation, Relevance value, General comment, Single dominant sentiment value"])
 
-        csvwriter.writerow([jsdata["videoid"], int(jsdata["starttime"]), int(jsdata["endtime"]), jsdata["value"], jsdata["agree"], jsdata["clarity"], jsdata["claritytext"], jsdata["relevanceValue"], jsdata["generalComment"]])
+        csvwriter.writerow([jsdata["videoid"], int(jsdata["starttime"]), int(jsdata["endtime"]), jsdata["value"], jsdata["agree"], jsdata["clarity"], jsdata["claritytext"], jsdata["relevanceValue"], jsdata["generalComment"], jsdata["singleDominantSentiment"]])
         csvfile.close()
 
     return "", 200
