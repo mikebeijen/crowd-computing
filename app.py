@@ -36,9 +36,14 @@ def assessmentPage():
 def post_javascript_data():
     jsdata = request.form['video_data']
     jsdata = json.loads(jsdata)
+    print(jsdata)
     with open("assessment-" + jsdata["videoid"] + ".csv", mode="a+", newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow([jsdata["videoid"], int(jsdata["starttime"]), int(jsdata["endtime"]), jsdata["value"], jsdata["agree"], jsdata["clarity"], jsdata["claritytext"]])
+
+        if os.stat("assessment-" + jsdata["videoid"] + ".csv").st_size == 0:
+            csvwriter.writerow(["Video id, Start time, End time, Sentiment value, Agreement value, Clarity value, Clarity explanation, Relevance value, General comment"])
+
+        csvwriter.writerow([jsdata["videoid"], int(jsdata["starttime"]), int(jsdata["endtime"]), jsdata["value"], jsdata["agree"], jsdata["clarity"], jsdata["claritytext"], jsdata["relevanceValue"], jsdata["generalComment"]])
         csvfile.close()
 
     return "", 200
@@ -66,10 +71,11 @@ def get_video_split():
 
     try:
         all_video_assessments = open("assessment-" + video_id + ".csv", "r")
+        all_video_assessments.readline()
     except FileNotFoundError:
         random_start_time = random.choice(list(video_assessment_amounts.keys()))
         video_id, video_end_time = all_video_info[random_start_time]
-        return video_id, video_start_time, video_end_time
+        return video_id, random_start_time, video_end_time
 
     for assessment in all_video_assessments:
         assessment_split = assessment.split(",")

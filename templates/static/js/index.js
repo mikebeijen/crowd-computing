@@ -18,6 +18,7 @@ function process(){
     value = null
     clarityValue = null
     agreeValue = null
+    relevantValue = null
 
     elements = document.getElementsByName("sentiment");
     for(i = 0; i < elements.length; i++) {
@@ -40,13 +41,27 @@ function process(){
         }
     }
 
+    relevantElements = document.getElementsByName("relevant");
+    for(i = 0; i < relevantElements.length; i++) {
+        if(relevantElements[i].checked) {
+            relevantValue = i
+        }
+    }
+
     if (clarityValue == 0) {
         clarityValue = "yes";
     } else {
         clarityValue = "no";
     }
 
+    if (relevantValue == 0) {
+        relevantValue = "yes";
+    } else {
+        relevantValue = "no";
+    }
+
     clarityText = document.getElementById("clarity-textbox").value;
+    generalCommentText = document.getElementById("general-textbox").value;
 
     if (value == null) {
         alert("You did not choose a sentiment yet.");
@@ -56,15 +71,21 @@ function process(){
         alert("You did not choose whether you agreed with the video yet.");
     } else if (clarityValue == "no" && clarityText == "") {
         alert("You did not explain why the video was unclear yet.");
+    } else if (relevantValue == null) {
+        alert("You did not choose whether the video was relevant to the coronavirus yet.");
     } else {
         if (clarityText == "") {
-            clarityText = " "
+            clarityText = "-"
+        }
+        if (generalCommentText == "") {
+            generalCommentText = "-"
         }
 
         clarityText = clarityText.replace(",", ";")
+        generalCommentText = generalCommentText.replace(",", ";")
 
         $.post( "/postmethod", {
-            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, claritytext: clarityText})
+            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, claritytext: clarityText, relevanceValue: relevantValue, generalComment: generalCommentText})
             }, function(err, req, resp){
             window.location.href = "/assessment.html";
         });
