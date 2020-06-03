@@ -55,12 +55,44 @@
 
                 <div id="clear-intro" style="display: none;">
                     <b>Awesome!</b>
-                    <p>We will also ask you whether the video itself was clear, like this: </p>
+                    <p>We will also ask you some other questions, like this: </p>
                     Was the video clear?<br>
                     <div id="radiobuttons-form">
-                        <label><input type="radio" name="clarity" onclick="trainingDone()"/>Yes</label>
-                        <label><input type="radio" name="clarity" onclick="trainingDone()"/>No</label>
+                        <label><input type="radio" name="clarity" onclick="hideTextbox()"/>Yes</label>
+                        <label><input type="radio" name="clarity" onclick="alert('This video should be clear for you!')"/>No</label>
                     </div>
+
+                    <div id="clarity-div"  style="display: none">
+                            <br><br>
+                                What was <b>unclear</b> about the video?<br>
+                                <input type="text" id="clarity-textbox" placeholder="Type here..."/>
+                            </div>
+
+                    <div id="clarity-div"  style="display: none">
+                            <br><br>
+                                What was <b>unclear</b> about the video?<br>
+                                <input type="text" id="clarity-textbox" placeholder="Type here..."/>
+                            </div>
+
+                            <br><br>
+                            <div id="general-div">
+                            Do you have a general comment?<br>
+                                <input type="text" id="general-textbox" placeholder="Type here..."/>
+                            </div>
+
+                            <br><br>
+                            Was the video <b>relevant to the coronavirus</b>?
+                            <div id="radiobuttons-form-relevant">
+                                <label><input type="radio" name="relevant"/>Yes</label>
+                                <label><input type="radio" name="relevant" onclick="alert('This video is relevant!')"/>No</label>
+                            </div>
+
+                            <br><br>
+                            Was it easy to identify <b>a single dominant sentiment</b> in the video?
+                            <div id="radiobuttons-form-single">
+                                <label><input type="radio" name="single" onclick="trainingDone()"/>Yes</label>
+                                <label><input type="radio" name="single" onclick="alert('It should be easy to identify a single (positive) sentiment in this video!')"/>No</label>
+                            </div>
                 </div>
                 <br><br>
                 <div id="next" style="display: none;">
