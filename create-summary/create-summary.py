@@ -1,4 +1,4 @@
-import operator, os, pytube, subprocess
+import operator, os, pytube, shutil
 
 videoId = "zyOQI995HWU"
 summaryLengthSeconds = 100
@@ -9,7 +9,7 @@ positive = True
 def crop(start: str, end: str, input: str, output: str):
     command = "ffmpeg -y -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
     os.system(command)
-    # subprocess.call(command)
+
 
 # Download the YouTube video if it is not downloaded yet
 def downloadVideo():
@@ -52,9 +52,8 @@ class Split:
 
 
 if __name__ == "__main__":
-    downloadVideo()
-    downloadVideo()
     # Initialize data and datastructure
+    downloadVideo()
     data = open("../assessment-" + videoId + ".csv", "r")
     data.readline()
     allAssessments = set()
@@ -110,3 +109,9 @@ if __name__ == "__main__":
 
     # Concatenate video splits
     os.system("ffmpeg -f concat -safe 0 -i mergelist-" + videoId + ".txt -c copy output.mp4")
+
+    # Remove leftover files
+    mergeList.close()
+    os.remove("mergelist-" + videoId + ".txt")
+    shutil.rmtree("video-splits-" + videoId)
+    shutil.rmtree("full-video-" + videoId)
