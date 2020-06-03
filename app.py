@@ -36,7 +36,6 @@ def assessmentPage():
 def post_javascript_data():
     jsdata = request.form['video_data']
     jsdata = json.loads(jsdata)
-    print(jsdata)
     with open("assessment-" + jsdata["videoid"] + ".csv", mode="a+", newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
 
