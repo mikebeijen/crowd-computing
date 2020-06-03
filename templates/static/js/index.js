@@ -9,6 +9,7 @@ $( document ).ready(function() {
     timeout = (endTime - startTime) * 1000;
     document.getElementById("votebutton").disabled = true;
     setTimeout(function(){document.getElementById("votebutton").disabled = false;},timeout);
+    setTimeout(function(){document.getElementById("sentiment-form").style.visibility = 'visible';},timeout);
 });
 
 function process(){
@@ -17,6 +18,8 @@ function process(){
     value = null
     clarityValue = null
     agreeValue = null
+    relevantValue = null
+    singleSentimentValue = null
 
     elements = document.getElementsByName("sentiment");
     for(i = 0; i < elements.length; i++) {
@@ -39,13 +42,22 @@ function process(){
         }
     }
 
-    if (clarityValue == 0) {
-        clarityValue = "yes";
-    } else {
-        clarityValue = "no";
+    relevantElements = document.getElementsByName("relevant");
+    for(i = 0; i < relevantElements.length; i++) {
+        if(relevantElements[i].checked) {
+            relevantValue = i
+        }
+    }
+
+    singleElements = document.getElementsByName("single");
+    for(i = 0; i < singleElements.length; i++) {
+        if(singleElements[i].checked) {
+            singleSentimentValue = i
+        }
     }
 
     clarityText = document.getElementById("clarity-textbox").value;
+    generalCommentText = document.getElementById("general-textbox").value;
 
     if (value == null) {
         alert("You did not choose a sentiment yet.");
@@ -53,17 +65,43 @@ function process(){
         alert("You did not choose whether the video was clear yet.");
     } else if (agreeValue == null) {
         alert("You did not choose whether you agreed with the video yet.");
-    } else if (clarityValue == "no" && clarityText == "") {
+    } else if (clarityValue == "no" && clarityText == null) {
         alert("You did not explain why the video was unclear yet.");
+    } else if (relevantValue == null) {
+        alert("You did not choose whether the video was relevant to the coronavirus yet.");
+    } else if(singleSentimentValue == null) {
+        alert("You did not choose whether it was easy to identify a single dominant sentiment yet.");
     } else {
-        if (clarityText == "") {
-            clarityText = " "
-        }
+        if (clarityValue == 0) {
+        clarityValue = "yes";
+    } else {
+        clarityValue = "no";
+    }
 
+    if (relevantValue == 0) {
+        relevantValue = "yes";
+    } else {
+        relevantValue = "no";
+    }
+
+    if (singleSentimentValue == 0) {
+        singleSentimentValue = "yes";
+    } else {
+        singleSentimentValue = "no";
+    }
+
+        if (clarityText == "") {
+            clarityText = "-"
+        }
+        if (generalCommentText == "") {
+            generalCommentText = "-"
+        }
+        console.log(clarityText)
         clarityText = clarityText.replace(",", ";")
+        generalCommentText = generalCommentText.replace(",", ";")
 
         $.post( "/postmethod", {
-            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, claritytext: clarityText})
+            video_data: JSON.stringify({videoid: videoId, starttime: startTime, endtime: endTime, value: value, agree:agreeValue,  clarity: clarityValue, claritytext: clarityText, relevanceValue: relevantValue, generalComment: generalCommentText, singleDominantSentiment: singleSentimentValue})
             }, function(err, req, resp){
             window.location.href = "/assessment.html";
         });

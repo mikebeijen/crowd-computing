@@ -15,9 +15,9 @@
                         <div id="video-embed"></div>
                         <script>getVideoEmbed()</script>
                         <br><br>
-                        <form id="sentiment-form">
-                            How would you rate the sentiment of the video?<br>
-                            (1 = very negative, 7 = very positive)<br>
+                        <form id="sentiment-form" style="visibility: hidden;">
+                            How would you rate the <b>sentiment</b> of the video?<br>
+                            (1 = very negative, 4 = neutral, 7 = very positive)<br>
                             <div id="radiobuttons-form">
                                 <label><input type="radio" name="sentiment" />1</label>
                                 <label><input type="radio" name="sentiment" />2</label>
@@ -29,8 +29,8 @@
                             </div>
 
                             <br><br>
-                            Did you agree with the content of the video?<br>
-                            (1 = complete agreement, 7 = complete disagreement)<br>
+                            Did you <b>agree with the content</b> of the video?<br>
+                            (1 = complete agreement, 4 = neutral agreement, 7 = complete disagreement)<br>
                             <div id="radiobuttons-form">
                                 <label><input type="radio" name="content" />1</label>
                                 <label><input type="radio" name="content" />2</label>
@@ -42,7 +42,7 @@
                             </div>
 
                             <br><br>
-                            Was the video clear?<br>
+                            Was the video <b>clear?</b><br>
                             <div id="radiobuttons-form">
                                 <label><input type="radio" name="clarity" onclick="hideTextbox()"/>Yes</label>
                                 <label><input type="radio" name="clarity" onclick="showTextbox()" />No</label>
@@ -51,13 +51,31 @@
 
                             <div id="clarity-div"  style="display: none">
                             <br><br>
-                            What was unclear about the video?<br>
+                                What was <b>unclear</b> about the video?<br>
                                 <input type="text" id="clarity-textbox" placeholder="Type here..."/>
                             </div>
 
                             <br><br>
+                            <div id="general-div">
+                            Do you have a general comment?<br>
+                                <input type="text" id="general-textbox" placeholder="Type here..."/>
+                            </div>
 
+                            <br><br>
+                            Was the video <b>relevant to the coronavirus</b>?
+                            <div id="radiobuttons-form-relevant">
+                                <label><input type="radio" name="relevant"/>Yes</label>
+                                <label><input type="radio" name="relevant"/>No</label>
+                            </div>
 
+                            <br><br>
+                            Was it easy to identify <b>a single dominant sentiment</b> in the video?
+                            <div id="radiobuttons-form-single">
+                                <label><input type="radio" name="single"/>Yes</label>
+                                <label><input type="radio" name="single"/>No</label>
+                            </div>
+
+                            <br><br>
                             <button id="votebutton" class="cut" type="button" onclick="process()">Submit</button>
                         </form>
                 </div>
