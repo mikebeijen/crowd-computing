@@ -12,3 +12,6 @@ Afterwards run `flask run`, and the results will be in the results folder.
 1. Update the files you've updated by removing the old ones and uploading the new ones
 2. run `sudo python3 app.py`
 3. Visit http://34.90.159.99/
+
+## Building the video
+When you've gathered enough data, you can run `create-summary.py`, which will generate a video of a minimal specified length. Make sure to have the `ffmpeg.exe` in the `create-summary` folder to make sure the command work. Your video will be available at `create-summary/output.mp4`.
