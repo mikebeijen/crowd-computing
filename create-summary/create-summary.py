@@ -106,12 +106,12 @@ if __name__ == "__main__":
         crop(str(split.startTime), str(split.endTime), input, output)
         counter += 1
         mergeList.write("file '" + output + "'\n")
+    mergeList.close()
 
     # Concatenate video splits
     os.system("ffmpeg -f concat -safe 0 -i mergelist-" + videoId + ".txt -c copy output.mp4")
 
     # Remove leftover files
-    mergeList.close()
     os.remove("mergelist-" + videoId + ".txt")
     shutil.rmtree("video-splits-" + videoId)
     shutil.rmtree("full-video-" + videoId)
