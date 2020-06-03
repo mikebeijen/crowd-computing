@@ -9,6 +9,7 @@ $( document ).ready(function() {
     timeout = (endTime - startTime) * 1000;
     document.getElementById("votebutton").disabled = true;
     setTimeout(function(){document.getElementById("votebutton").disabled = false;},timeout);
+    setTimeout(function(){document.getElementById("sentiment-form").style.visibility = 'visible';},timeout);
 });
 
 function process(){
