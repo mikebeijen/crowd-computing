@@ -5,7 +5,7 @@ summaryLengthSeconds = 100
 positive = True
 
 
-# Saves a part of the video to a seperate file
+# Saves a part of the video to a separate file
 def crop(start: str, end: str, input: str, output: str):
     command = "ffmpeg -y -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
     os.system(command)
@@ -52,7 +52,7 @@ class Split:
 
 
 if __name__ == "__main__":
-    # Initialize data and datastructure
+    # Initialize data and datastructures
     downloadVideo()
     data = open("../assessment-" + videoId + ".csv", "r")
     data.readline()
@@ -72,8 +72,11 @@ if __name__ == "__main__":
         relevanceValue = line[7]
         generalComment = line[8]
         singleSentimentValue = line[9]
-        assessment = Assessment(videoId, startTime, endTime, sentimentValue, agreementValue, clarityValue, clarityExplanation, relevanceValue, generalComment, singleSentimentValue)
-        allAssessments.add(assessment)
+
+        # Filter on only COVID related videos and clear videos
+        if relevanceValue == "yes" and clarityValue == "yes":
+            assessment = Assessment(videoId, startTime, endTime, sentimentValue, agreementValue, clarityValue, clarityExplanation, relevanceValue, generalComment, singleSentimentValue)
+            allAssessments.add(assessment)
 
     # Build split objects in dictionary
     for assessment in allAssessments:
@@ -89,9 +92,13 @@ if __name__ == "__main__":
 
     # Get as many splits as needed to fill the minimal summary length
     while summaryLengthSeconds > 0:
-        split = allSplits.pop()
-        resultingSplits.append(split)
-        summaryLengthSeconds -= split.length
+        try:
+            split = allSplits.pop()
+            print(split.averageSentimentScore)
+            resultingSplits.append(split)
+            summaryLengthSeconds -= split.length
+        except IndexError:
+            break
 
     # Sort resulting splits by start time
     resultingSplits.sort(key=operator.attrgetter('startTime'))
@@ -114,4 +121,4 @@ if __name__ == "__main__":
     # Remove leftover files
     os.remove("mergelist-" + videoId + ".txt")
     shutil.rmtree("video-splits-" + videoId)
-    shutil.rmtree("full-video-" + videoId)
+    #shutil.rmtree("full-video-" + videoId)
